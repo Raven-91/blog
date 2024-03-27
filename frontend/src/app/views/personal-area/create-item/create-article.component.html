@@ -1,0 +1,296 @@
+<section class="section">
+  <div class="ctn overflow-hidden">
+    <div class="mb-5">
+      <a routerLink="/project" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+        {{ "createArticleComponent.linkToListOfArticles" | translate }}
+      </a>
+    </div>
+    <form action="#" class="flex flex-col gap-6" [formGroup]="contentForm">
+      <div class="flex sm:items-start sm:justify-between gap-6 flex-col sm:flex-row">
+        <div class="basis-[65%]">
+          <label for="author" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            {{ "createArticleComponent.formFieldAuthor" | translate }}
+          </label>
+          <input type="text"
+                 id="author"
+                 name="author"
+                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
+                 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+                 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                 formControlName="author"
+                 [class.invalid]="isValidInput(contentForm, 'author')"
+                 [class.valid]="getInputValue(contentForm, 'author')" readonly>
+          @if (isValidInput(contentForm, 'author')) {
+            <p class="invalid-message mt-2 text-xs text-red-600 dark:text-red-400">
+              {{ "createArticleComponent.formFieldAuthorErrorMessage" | translate }}
+            </p>
+          }
+        </div>
+        <div class="basis-auto sm:basis-96">
+          <label for="datepicker" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            {{ "createArticleComponent.formFieldDate" | translate }}
+          </label>
+          <div class="relative">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                   xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+              </svg>
+            </div>
+            <input
+              type="text"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
+                   focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600
+                   dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="{{ 'createArticleComponent.formFieldDatePlaceholder' | translate }}"
+              name="date"
+              autocomplete="off"
+              id="datepicker"
+              formControlName="date"
+              [class.invalid]="!datePickerInput.value && (contentForm.get('date')?.dirty || contentForm.get('date')?.touched)"
+              [class.valid]="datePickerInput.value" #datePickerInput>
+          </div>
+          @if (!datePickerInput.value && (contentForm.get('date')?.dirty || contentForm.get('date')?.touched)) {
+            <p class="invalid-message mt-2 text-xs text-red-600 dark:text-red-400">
+              {{ "createArticleComponent.formFieldDateErrorMessage" | translate }}
+            </p>
+          }
+        </div>
+      </div>
+      <div>
+        <label for="subjectEn" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          {{ "createArticleComponent.formFieldSubjectEn" | translate }}
+        </label>
+        <input type="text"
+               id="subjectEn"
+               name="subjectEn"
+               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
+                 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+                 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+               formControlName="subjectEn"
+               [class.invalid]="isValidInput(contentForm, 'subjectEn')"
+               [class.valid]="getInputValue(contentForm, 'subjectEn')" readonly>
+        @if (isValidInput(contentForm, 'subjectEn') || contentForm.get('subjectEn')?.errors?.['pattern']) {
+          <p class="invalid-message mt-2 text-xs text-red-600 dark:text-red-400">
+            {{ "createArticleComponent.formFieldSubjectEnErrorMessage" | translate }}
+          </p>
+        }
+      </div>
+      <div>
+        <label for="subjectRu" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          {{ "createArticleComponent.formFieldSubjectRu" | translate }}
+        </label>
+        <input type="text"
+               id="subjectRu"
+               name="subjectRu"
+               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
+                 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+                 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+               formControlName="subjectRu"
+               [class.invalid]="isValidInput(contentForm, 'subjectRu')"
+               [class.valid]="getInputValue(contentForm, 'subjectRu')" readonly>
+        @if (isValidInput(contentForm, 'subjectRu') || contentForm.get('subjectRu')?.errors?.['pattern']) {
+          <p class="invalid-message mt-2 text-xs text-red-600 dark:text-red-400">
+            {{ "createArticleComponent.formFieldSubjectRuErrorMessage" | translate }}
+          </p>
+        }
+      </div>
+      <div>
+        <label for="titleEn" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          {{ "createArticleComponent.formFieldArticleTitleEn" | translate }}
+        </label>
+        <input type="text"
+               id="titleEn"
+               name="titleEn"
+               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
+                 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+                 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+               placeholder=" {{ 'createArticleComponent.formFieldArticleTitleEnPlaceholder' | translate }}"
+               formControlName="titleEn"
+               [class.invalid]="isValidInput(contentForm, 'titleEn')"
+               [class.valid]="getInputValue(contentForm, 'titleEn')">
+        @if (isValidInput(contentForm, 'titleEn') || contentForm.get('titleEn')?.errors?.['pattern']) {
+          <p class="invalid-message mt-2 text-xs text-red-600 dark:text-red-400">
+            {{ "createArticleComponent.formFieldArticleTitleEn" | translate }}
+          </p>
+        }
+      </div>
+      <div>
+        <label for="titleRu" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          {{ "createArticleComponent.formFieldArticleTitleRu" | translate }}
+        </label>
+        <input type="text"
+               id="titleRu"
+               name="titleRu"
+               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
+                 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+                 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+               placeholder=" {{ 'createArticleComponent.formFieldArticleTitleRuPlaceholder' | translate }}"
+               formControlName="titleRu"
+               [class.invalid]="isValidInput(contentForm, 'titleRu')"
+               [class.valid]="getInputValue(contentForm, 'titleRu')">
+        @if (isValidInput(contentForm, 'titleRu') || contentForm.get('titleRu')?.errors?.['pattern']) {
+          <p class="invalid-message mt-2 text-xs text-red-600 dark:text-red-400">
+            {{ "createArticleComponent.formFieldArticleTitleRuErrorMessage" | translate }}
+          </p>
+        }
+      </div>
+      <div>
+        <label for="descriptionEn" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          {{ "createArticleComponent.formFieldArticleDescriptionEn" | translate }}
+        </label>
+        <textarea id="descriptionEn" name="descriptionEn" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50
+        rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600
+        dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="{{ 'createArticleComponent.formFieldArticleDescriptionEnPlaceholder' | translate }}"
+                  formControlName="descriptionEn"
+                  [class.invalid]="isValidInput(contentForm, 'descriptionEn')"
+                  [class.valid]="getInputValue(contentForm, 'descriptionEn')">
+        </textarea>
+        @if (isValidInput(contentForm, 'descriptionEn')) {
+          <p class="invalid-message mt-2 text-xs text-red-600 dark:text-red-400">
+            {{ "createArticleComponent.formFieldArticleDescriptionEnErrorMessage" | translate }}
+          </p>
+        }
+      </div>
+      <div>
+        <label for="descriptionRu" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          {{ "createArticleComponent.formFieldArticleDescriptionRu" | translate }}
+        </label>
+        <textarea id="descriptionRu" name="descriptionRu" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50
+        rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600
+        dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="{{ 'createArticleComponent.formFieldArticleDescriptionRuPlaceholder' | translate }}"
+                  formControlName="descriptionRu"
+                  [class.invalid]="isValidInput(contentForm, 'descriptionRu')"
+                  [class.valid]="getInputValue(contentForm, 'descriptionRu')">
+        </textarea>
+        @if (isValidInput(contentForm, 'descriptionRu')) {
+          <p class="invalid-message mt-2 text-xs text-red-600 dark:text-red-400">
+            {{ "createArticleComponent.formFieldArticleDescriptionRuErrorMessage" | translate }}
+          </p>
+        }
+      </div>
+      <div>
+        <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          {{ "createArticleComponent.formFieldUpLoadImage" | translate }}
+        </label>
+        <div class="group input-wrapper relative block border border-gray-300 rounded-lg bg-gray-50
+               dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 overflow-hidden"
+             [class.invalid]="!fileInput.value && (contentForm.get('image')?.dirty || contentForm.get('image')?.touched)"
+             [class.valid]="getInputValue(contentForm, 'image')">
+          <input type="file"
+                 id="image"
+                 name="image"
+                 accept=".svg, .jpg, .jpeg, .png"
+                 class="block w-full opacity-0"
+                 formControlName="image" #fileInput (change)="setValueFileInput()">
+          <div
+            class="absolute top-0 left-0 z-[2] cursor-pointer w-full h-[41px] *:p-2.5 *:h-full flex items-center gap-5"
+            (click)="triggerFileInput()">
+            <span class="block text-sm text-white dark:text-black text-center w-[140px] bg-blue-900 dark:bg-gray-400">
+              {{ "createArticleComponent.formFieldUpLoadImagePlaceholder" | translate }}
+            </span>
+            <span class="text-sm dark:text-gray-400" #valueFileInput></span>
+          </div>
+        </div>
+        <p class="mt-1 text-sm text-black dark:text-white" id="file_input_help">SVG, PNG, JPG or JPEG (MAX. 800x400px).</p>
+        @if (!fileInput.value && (contentForm.get('image')?.dirty || contentForm.get('image')?.touched)) {
+          <p class="invalid-message mt-2 text-xs text-red-600 dark:text-red-400">
+            {{ "createArticleComponent.formFieldUpLoadImageError" | translate }}
+          </p>
+        }
+      </div>
+      <div>
+        <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          {{ "createArticleComponent.formFieldEditorEn" | translate }}
+        </div>
+        <div class="rounded-lg"
+             [ngClass]="{
+           'editor-block': isValidInput(contentForm, 'contentEn') || getInputValue(contentForm, 'contentEn'),
+           'editor-valid-block': getInputValue(contentForm, 'contentEn'),
+           'editor-invalid-block': isValidInput(contentForm, 'contentEn')
+           }">
+          <editor apiKey="5gsi8ro79yn3gthsz08oxwg1cfer9s3ufzdqcxhc8oqt17eb" id="contentEn" outputFormat="html"
+                  formControlName="contentEn" [init]="{
+                base_url: '/tinymce',
+                suffix: '.min',
+                height: 500,
+                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+                language: lang,
+                skin: settings.skin,
+                content_css: settings.contentCss
+                }" #contentEn></editor>
+        </div>
+        @if (isValidInput(contentForm, 'contentEn')) {
+          <p class="invalid-message mt-2 text-xs text-red-600 dark:text-red-400">
+            {{ "createArticleComponent.formFieldEditorEnError" | translate }}
+          </p>
+        }
+      </div>
+      <div>
+        <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          {{ "createArticleComponent.formFieldEditorRu" | translate }}
+        </div>
+        <div class="rounded-lg"
+             [ngClass]="{
+           'editor-block': isValidInput(contentForm, 'contentRu') || getInputValue(contentForm, 'contentRu'),
+           'editor-valid-block': getInputValue(contentForm, 'contentRu'),
+           'editor-invalid-block': isValidInput(contentForm, 'contentRu')
+           }">
+          <editor apiKey="5gsi8ro79yn3gthsz08oxwg1cfer9s3ufzdqcxhc8oqt17eb" id="contentRu" outputFormat="html"
+                  formControlName="contentRu" [init]="{
+                base_url: '/tinymce',
+                suffix: '.min',
+                height: 500,
+                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+                language: lang,
+                skin: settings.skin,
+                content_css: settings.contentCss
+                }" #contentRu></editor>
+        </div>
+        @if (isValidInput(contentForm, 'contentRu')) {
+          <p class="invalid-message mt-2 text-xs text-red-600 dark:text-red-400">
+            {{ "createArticleComponent.formFieldEditorRuError" | translate }}
+          </p>
+        }
+      </div>
+      <div>
+        <label for="tags" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          {{ "createArticleComponent.formFieldTags" | translate }}
+        </label>
+        <textarea id="tags" name="descriptionRu" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50
+        rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600
+        dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder=" {{ 'createArticleComponent.formFieldTagsPlaceholder' | translate }}"
+                  formControlName="tags"
+                  [class.invalid]="isValidInput(contentForm, 'tags')"
+                  [class.valid]="getInputValue(contentForm, 'tags')">
+        </textarea>
+        @if (isValidInput(contentForm, 'tags')) {
+          <p class="invalid-message mt-2 text-xs text-red-600 dark:text-red-400">
+            {{ "createArticleComponent.formFieldTagsErrorMessage" | translate }}
+          </p>
+        }
+      </div>
+      <div class="max-[540px]:text-center">
+        <button
+          type="submit"
+          class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit
+        hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300
+        dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800
+        disabled:bg-gray-300 disabled:text-slate-500 disabled:border-gray-600 disabled:cursor-not-allowed
+        dark:disabled:bg-slate-400 dark:disabled:text-white dark:disabled:border-gray-600 min-w-[115px]"
+          title="{{ 'createArticleComponent.formButtonTitle' | translate }}"
+          [disabled]="contentForm.invalid"
+          (click)="getContentFromEditor()">
+          {{ "createArticleComponent.formButtonText" | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+

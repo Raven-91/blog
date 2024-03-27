@@ -1,0 +1,8 @@
+.reaction {
+  &.selected {
+    .reaction__count,
+    .reaction__icon {
+      color: #3b82f6;
+    }
+  }
+}

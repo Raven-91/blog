@@ -1,0 +1,49 @@
+.header {
+  transition: transform 0.2s linear;
+
+  &.active {
+    height: 100%;
+  }
+
+  &.hide {
+    transform: translateY(-100%);
+  }
+}
+
+.header-bottom {
+
+  //.header-bottom__menu-items
+  &__menu-items.active {
+    display: block;
+
+  }
+}
+
+.header-toolbar {
+
+  //.header-toolbar__user
+  &__user.active {
+      display: block;
+  }
+}
+
+.burger-menu {
+
+  &.active {
+    .burger-menu__line {
+
+      &:nth-child(1) {
+        transform: rotate(45deg) translate(3px, 3px);
+      }
+
+      &:nth-child(2) {
+        display: none;
+      }
+
+      &:nth-child(3) {
+        transform: rotate(-45deg) translate(3px, -2px);
+      }
+
+    }
+  }
+}

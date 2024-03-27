@@ -1,0 +1,40 @@
+<div
+  class="select relative hover:bg-gray-50 w-52 dark:bg-gray-800 dark:hover:bg-gray-700 max-[767px]:w-11 max-[767px]:h-11"
+  [class.active]="selectOpened"
+  (click)="toggleSelect()" #select>
+  <div
+    class="select__head flex items-center gap-2 px-2 lg:px-4 py-2 lg:py-2.5 rounded-lg cursor-pointer w-full
+    hover:outline-2 hover:outline hover:outline-slate-200 transition duration-200 ease-linear
+    text-base text-gray-900 font-medium dark:text-gray-300 dark:hover:text-white dark:hover:outline-1">
+    <img src="./assets/images/{{ currentLanguage?.flag }}" class="select__icon h-6 w-6" alt="Flag">
+    <span class="select__text max-[767px]:hidden">
+      {{ currentLanguage?.language }}
+    </span>
+    <svg class="w-[20px] h-[20px] ml-auto max-[767px]:hidden" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+         fill="none" viewBox="0 0 24 24">
+      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/>
+    </svg>
+  </div>
+  <div class="select__body absolute top-14 left-0 rounded bg-white z-20 w-full shadow-md hidden dark:bg-gray-700">
+    <ul class="select__items flex flex-col py-2 gap-1">
+      @for (language of languages; track language) {
+        <li class="select__item item-select flex items-center gap-2 cursor-pointer py-2 lg:py-2.5 px-2 lg:px-4 transition
+                   duration-200 ease-linear
+                   hover:bg-gray-100 text-base text-gray-700 font-medium hover:text-primary-700 dark:text-gray-400
+                   dark:hover:text-white dark:hover:bg-gray-600"
+            [class.selected]="language.selected"
+            (click)="selectLanguage(language)">
+          <img src="./assets/images/{{ language.flag }}" class="item-select__icon h-6 w-6" alt="Flag">
+          <span class="item-select__text max-[767px]:hidden">
+            {{ language.language }}
+          </span>
+        </li>
+      }
+    </ul>
+  </div>
+</div>
+
+
+
+
+

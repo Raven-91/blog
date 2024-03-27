@@ -1,0 +1,248 @@
+<header
+  class="header shadow-md transition duration-200 ease-linear
+  fixed top-0 left-0 w-full z-50
+  [&.active]:before:w-full [&.active]:before:h-full [&.active]:before:absolute
+  [&.active]:before:top-0 [&.active]:before:left-0 [&.active]:before:z-10
+  [&.active]:before:bg-white dark:[&.active]:before:bg-gray-700"
+  [class.active]="activeMenu" [class.hide]="hide">
+
+  <nav
+    class="header__top header-top bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-600 relative z-20">
+    <div
+      class="ctn py-3 flex flex-wrap justify-between items-center
+      max-[479px]:flex-col max-[479px]:gap-5">
+
+      <a routerLink="/" class="header-top__logo flex items-center dark:text-white" (click)="clickMenuItem()">
+        <svg class="w-11 h-11 mr-3" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M24.5199 13.4434C24.4458 13.9538 24.1092 14.6473 23.723 15.2502C23.2358 16.0109 22.4627 16.5438 21.5779 16.7288L17.6802 17.5439C17.0537 17.6749 16.4857 18.0027 16.0592 18.4795L13.5035 21.3361C13.0232 21.873 12.6875 21.745 12.6875 21.0249C12.6817 21.0516 11.4191 24.3077 14.7651 26.2376C16.0507 26.9791 17.9013 26.7127 19.1869 25.9712L25.9988 22.042C28.5463 20.5726 30.345 18.0868 30.9428 15.2094C30.9665 15.0955 30.9848 14.9813 31.0045 14.8671L24.5199 13.4434Z"
+            fill="url(#paint0_linear_13207_83133)"/>
+          <path
+            d="M22.7528 9.51725C24.0384 10.2588 24.5637 11.3628 24.5637 12.8459C24.5637 13.0472 24.5479 13.2461 24.5194 13.442L27.2641 14.621L31.004 14.8658C31.4829 12.0943 30.5444 9.24153 28.862 6.97396C27.5959 5.26751 25.9667 3.78665 24.0081 2.65689C22.417 1.73917 20.7636 1.13452 19.1025 0.802734L17.2361 3.21974L16.6465 5.9951L22.7528 9.51725Z"
+            fill="url(#paint1_linear_13207_83133)"/>
+          <path
+            d="M0.783353 11.5518C0.782654 11.554 0.784588 11.5546 0.785316 11.5524C0.929339 11.1205 1.10993 10.6385 1.33539 10.1237C2.5131 7.4343 4.78262 5.64062 7.57467 4.72608C10.3667 3.81156 13.4153 4.13212 15.9599 5.59988L16.6463 5.99578L19.1023 0.803412C11.2907 -0.756764 3.30703 3.83253 0.793284 11.5217C0.792083 11.5254 0.787713 11.5382 0.783353 11.5518Z"
+            fill="url(#paint2_linear_13207_83133)"/>
+          <path
+            d="M18.9201 25.9714C17.6345 26.7129 16.0506 26.7129 14.765 25.9714C14.5904 25.8707 14.4259 25.7575 14.2703 25.635L12.0093 27.1895L10.0605 30.3386C12.2236 32.1387 15.0324 32.7174 17.8392 32.3955C19.9515 32.1533 22.0498 31.4841 24.0084 30.3544C25.5995 29.4367 26.9503 28.3085 28.0685 27.0371L26.9065 24.2138L25.0265 22.4492L18.9201 25.9714Z"
+            fill="url(#paint3_linear_13207_83133)"/>
+          <path
+            d="M14.2694 25.6346C13.2789 24.8544 12.6864 23.6577 12.6864 22.3759V22.2481V11.5729C12.6864 10.9692 12.8643 10.8666 13.3876 11.1685C12.5816 10.7035 10.7195 9.10749 8.42044 10.4336C7.13484 11.1752 6.07617 12.812 6.07617 14.2951V22.1534C6.07617 25.0922 7.59833 28.1578 9.79375 30.1138C9.88059 30.1911 9.97049 30.2641 10.0596 30.3382L14.2694 25.6346Z"
+            fill="url(#paint4_linear_13207_83133)"/>
+          <path
+            d="M27.9097 5.81328C27.9081 5.81158 27.9066 5.81295 27.9081 5.81466C28.2106 6.15526 28.538 6.55248 28.8716 7.00497C30.614 9.36862 31.2651 12.3623 30.6618 15.2353C30.0586 18.1082 28.2564 20.5855 25.7118 22.0533L25.0254 22.4492L28.0674 27.0371C33.3256 21.0586 33.3392 11.8564 27.9308 5.83692C27.9282 5.83404 27.9193 5.82385 27.9097 5.81328Z"
+            fill="url(#paint5_linear_13207_83133)"/>
+          <path
+            d="M6.34355 14.2958C6.34354 12.8127 7.13551 11.4423 8.42113 10.7007C8.59565 10.6001 8.77601 10.5143 8.96002 10.441L8.74304 7.70749L7.21861 4.58008C4.57671 5.55151 2.4397 7.55912 1.31528 10.1485C0.469097 12.0972 9.792e-06 14.2472 0 16.5067C0 18.3422 0.302549 20.075 0.845532 21.6782L3.87391 22.0845L6.34355 21.3401V14.2958V14.2958Z"
+            fill="url(#paint6_linear_13207_83133)"/>
+          <path
+            d="M8.96016 10.44C10.1317 9.97312 11.4653 10.0589 12.5764 10.6998L12.6872 10.7637L21.5826 15.8946C22.2066 16.2545 22.1499 16.6087 21.4446 16.7561L21.9578 16.6488C22.633 16.5077 23.2499 16.1626 23.7217 15.6597C24.5328 14.7951 24.8306 13.752 24.8306 12.8467C24.8306 11.3637 24.0386 9.99323 22.753 9.25169L15.9411 5.32258C13.3936 3.85316 10.3395 3.53983 7.54622 4.46132C7.43572 4.49776 7.32756 4.53909 7.21875 4.5791L8.96016 10.44Z"
+            fill="url(#paint7_linear_13207_83133)"/>
+          <path
+            d="M19.3224 32.1533C19.3246 32.1528 19.3242 32.1508 19.3219 32.1513C18.8755 32.2427 18.3674 32.3274 17.8084 32.3897C14.8882 32.7155 11.9677 31.7819 9.77888 29.8235C7.59011 27.8651 6.34372 25.0672 6.34372 22.1317L6.34371 21.3398L0.845703 21.6779C3.39905 29.2166 11.3691 33.8294 19.2913 32.1597C19.2951 32.159 19.3084 32.1563 19.3224 32.1533Z"
+            fill="url(#paint8_linear_13207_83133)"/>
+          <defs>
+            <linearGradient id="paint0_linear_13207_83133" x1="20.0604" y1="24.2706" x2="23.2079" y2="13.3075"
+                            gradientUnits="userSpaceOnUse">
+              <stop stop-color="#1724C9"/>
+              <stop offset="1" stop-color="#1C64F2"/>
+            </linearGradient>
+            <linearGradient id="paint1_linear_13207_83133" x1="27.3093" y1="10.8996" x2="19.0297" y2="2.64913"
+                            gradientUnits="userSpaceOnUse">
+              <stop stop-color="#1C64F2"/>
+              <stop offset="1" stop-color="#0092FF"/>
+            </linearGradient>
+            <linearGradient id="paint2_linear_13207_83133" x1="16.1642" y1="5.52115" x2="3.67407" y2="6.3104"
+                            gradientUnits="userSpaceOnUse">
+              <stop stop-color="#0092FF"/>
+              <stop offset="1" stop-color="#45B2FF"/>
+            </linearGradient>
+            <linearGradient id="paint3_linear_13207_83133" x1="15.32" y1="29.1636" x2="26.5369" y2="26.1368"
+                            gradientUnits="userSpaceOnUse">
+              <stop stop-color="#1C64F2"/>
+              <stop offset="1" stop-color="#0092FF"/>
+            </linearGradient>
+            <linearGradient id="paint4_linear_13207_83133" x1="7.26808" y1="16.1832" x2="15.2317" y2="24.4352"
+                            gradientUnits="userSpaceOnUse">
+              <stop stop-color="#1724C9"/>
+              <stop offset="1" stop-color="#1C64F2"/>
+            </linearGradient>
+            <linearGradient id="paint5_linear_13207_83133" x1="25.4497" y1="22.1366" x2="31.0061" y2="10.9354"
+                            gradientUnits="userSpaceOnUse">
+              <stop stop-color="#0092FF"/>
+              <stop offset="1" stop-color="#45B2FF"/>
+            </linearGradient>
+            <linearGradient id="paint6_linear_13207_83133" x1="5.36387" y1="9.63214" x2="2.39054" y2="20.8077"
+                            gradientUnits="userSpaceOnUse">
+              <stop stop-color="#1C64F2"/>
+              <stop offset="1" stop-color="#0092FF"/>
+            </linearGradient>
+            <linearGradient id="paint7_linear_13207_83133" x1="20.5432" y1="9.09961" x2="9.6778" y2="11.8049"
+                            gradientUnits="userSpaceOnUse">
+              <stop stop-color="#1724C9"/>
+              <stop offset="1" stop-color="#1C64F2"/>
+            </linearGradient>
+            <linearGradient id="paint8_linear_13207_83133" x1="6.40691" y1="21.8576" x2="13.3327" y2="32.2755"
+                            gradientUnits="userSpaceOnUse">
+              <stop stop-color="#0092FF"/>
+              <stop offset="1" stop-color="#45B2FF"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="text-lg font-semibold self-center whitespace-nowrap">Flowbite</span>
+      </a>
+      <div class="header-top__toolbar header-toolbar flex items-center gap-5 max-[479px]:self-end">
+
+        @if (languages) {
+          <app-select [languages]="languages" (switchLanguage)="translateContentPage($event)"></app-select>
+        }
+
+        <button
+          class="header-toolbar__background flex items-center justify-center p-2 text-xs w-11 h-11 font-medium
+          text-gray-700 bg-white border border-gray-200 rounded-lg outline-0 transition duration-200 ease-linear
+          hover:bg-gray-100 hover:text-primary-700
+          dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+          title='{{ "header.titleChangeTheme" | translate}}'
+          (click)="toggleTheme()">
+          @if (!isDarkMode) {
+            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                 viewBox="0 0 18 20">
+              <path d="M17.8 13.75a1 1 0 0 0-.859-.5A7.488 7.488 0 0 1 10.52 2a1 1 0 0 0 0-.969A1.035 1.035 0 0 0 9.687.5h-.113a9.5
+              9.5 0 1 0 8.222 14.247 1 1 0 0 0 .004-.997Z"></path>
+            </svg>
+          } @else {
+            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                 viewBox="0 0 20 20">
+              <path
+                d="M10 15a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0-11a1 1 0 0 0 1-1V1a1 1 0 0 0-2 0v2a1 1 0 0 0 1 1Zm0 12a1 1 0 0 0-1 1v2a1 1
+                0 1 0 2 0v-2a1 1 0 0 0-1-1ZM4.343 5.757a1 1 0 0 0 1.414-1.414L4.343 2.929a1 1 0 0 0-1.414 1.414l1.414 1.414Zm11.314
+                8.486a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414ZM4 10a1 1 0 0 0-1-1H1a1 1 0 0 0 0 2h2a1 1
+                0 0 0 1-1Zm15-1h-2a1 1 0 1 0 0 2h2a1 1 0 0 0 0-2ZM4.343 14.243l-1.414 1.414a1 1 0 1 0 1.414 1.414l1.414-1.414a1 1 0 0
+                0-1.414-1.414ZM14.95 6.05a1 1 0 0 0 .707-.293l1.414-1.414a1 1 0 1 0-1.414-1.414l-1.414 1.414a1 1 0 0 0 .707 1.707Z"></path>
+            </svg>
+          }
+        </button>
+
+        @if (!isLogged) {
+          <a routerLink="/login"
+             class="header-toolbar__entry flex items-center justify-center border border-gray-200 rounded-lg p-2 w-11 h-11
+             transition duration-200 ease-linear text-gray-800
+             hover:bg-gray-100 hover:text-primary-700
+             dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 dark:text-gray-300  dark:hover:text-white"
+             title='{{ "header.titleLogin" | translate}}'>
+            <svg class="w-9 h-9" aria-hidden="true"
+                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M16 12H4m12 0-4 4m4-4-4-4m3-4h2a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-2"/>
+            </svg>
+          </a>
+        } @else if (isLogged) {
+          <div class="header-toolbar__entry relative z-20" #userMenu>
+            <button
+              class="flex items-center justify-center border border-gray-200 rounded-lg p-1 w-11 h-11
+              transition duration-200 ease-linear text-gray-800
+              hover:bg-gray-100 hover:text-primary-700
+              dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 dark:text-gray-300 dark:hover:text-white"
+              (click)="toggleUserMenu()">
+              <svg class="w-[42px] h-[42px]" aria-hidden="true"
+                   xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd"
+                      d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z"
+                      clip-rule="evenodd"/>
+              </svg>
+            </button>
+            <div
+              class="header-toolbar__user absolute top-14 right-0 z-20 hidden rounded bg-white w-52 max-[540px]:w-44
+              shadow-md dark:bg-gray-700 transition duration-200 ease-linear"
+              [class.active]="activeUserMenu">
+              <ul class="user__menu flex flex-col py-2 gap-1 w-full">
+                <li class="cursor-pointer py-2 lg:py-2.5 px-2 lg:px-4 transition duration-200 ease-linear text-base
+                text-gray-700 font-medium
+                hover:bg-gray-100 hover:text-primary-700
+                dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                  <a routerLink="/personal-area" (click)="clickMenuItem()">{{ "header.userMenuItem" | translate }}</a>
+                </li>
+                <li class="cursor-pointer py-2 lg:py-2.5 px-2 lg:px-4 transition duration-200 ease-linear hover:bg-gray-100
+          text-base text-gray-700 font-medium hover:text-primary-700 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                  <span (click)="logout()">{{ "header.userMenuExit" | translate }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        }
+
+        <!-- Меню бургер -->
+        <button
+          class="header-toolbar__menu-burger hidden items-center justify-center p-2 text-xs w-11 h-11 font-medium text-gray-700 bg-white border border-gray-200 rounded-lg outline-0 transition duration-200 ease-linear hover:bg-gray-100 hover:text-primary-700 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 max-[540px]:flex"
+          (click)="toggleMenu()">
+          <div class="burger-menu flex flex-col items-center justify-center gap-1.5
+          *:block *:w-6 *:h-0.5 *:bg-gray-700 *:dark:bg-gray-300 *:transition *:duration-200 *:ease-linear"
+               [class.active]="activeMenu">
+            <span class="burger-menu__line"></span>
+            <span class="burger-menu__line"></span>
+            <span class="burger-menu__line"></span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="header__bottom header-bottom bg-white border-b border-gray-200 dark:bg-gray-700 dark:border-gray-600">
+    <div
+      class="header-bottom__content ctn flex flex-wrap justify-between items-center py-4 md:px-6
+      max-[767px]:flex-col max-[767px]:gap-5 max-[767px]:items-stretch relative">
+
+      <div
+        class="header-bottom__menu-items basis-2/4 max-[767px]:basis-full max-[540px]:hidden max-[540px]:absolute
+        max-[540px]:top-0 max-[540px]:right-0 max-[540px]:w-full max-[540px]:p-4 z-10 transition duration-200 ease-linear"
+        [class.active]="activeMenu">
+        <ul
+          class="menu flex items-center gap-8 text-base font-medium mt-0 max-[540px]:flex-col
+          max-[540px]:items-start max-[540px]:text-xl">
+          <li class="menu__item">
+            <a routerLink="/"
+               class="menu__link text-gray-900 hover:text-primary-600 dark:hover:text-primary-500 dark:text-white"
+               aria-current="page"
+               (click)="clickMenuItem()">
+              {{ "header.menuItem1" | translate }}
+            </a>
+          </li>
+          <li class="menu__item">
+            <a routerLink="/" fragment="catalog"
+               class="menu__link text-gray-900 hover:text-primary-600 dark:hover:text-primary-500 dark:text-white"
+               (click)="clickMenuItem()">
+              {{ "header.menuItem2" | translate }}
+            </a>
+          </li>
+          <li class="menu__item">
+            <a routerLink="/contact"
+               class="menu__link text-gray-900 hover:text-primary-600 dark:hover:text-primary-500 dark:text-white"
+               (click)="clickMenuItem()">
+              {{ "header.menuItem3" | translate }}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <form class="header-bottom__search basis-2/4 max-[767px]:basis-full">
+        <div class="flex items-center w-full relative">
+          <input type="search" id="search-dropdown"
+                 class="block w-full rounded-lg text-gray-900 text-base p-2.5 bg-gray-50 border border-gray-300
+                 focus:ring-primary-500 focus:border-primary-500 dark:focus:border-primary-500 dark:text-white dark:bg-gray-800 dark:border-gray-600"
+                 placeholder='{{ "header.searchInputPlaceholder" | translate}}' required="">
+          <button type="submit"
+                  class="bg-primary-700 text-base text-white font-medium p-3 border border-primary-700 rounded-r-lg absolute top-0 right-0
+                  hover:bg-primary-800 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                  (click)="search()">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
+  </nav>
+</header>
+

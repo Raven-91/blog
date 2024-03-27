@@ -1,0 +1,50 @@
+@if (accordionData && accordionData.length > 0) {
+  <div class="accordion" #accordion>
+    <button
+      type="button"
+      class="accordion__head flex items-center justify-between gap-3 w-full p-4 lg:p-5 font-medium text-gray-800
+      border border-gray-200 rounded-lg dark:border-gray-700 dark:text-white hover:bg-primary-100 dark:hover:bg-gray-800"
+      (click)="toggleAccordion()"
+      [class.active]="openAccordion">
+      <span>{{ "accordionComponent.headText" | translate }}</span>
+      <svg class="accordion__arrow w-6 h-6 text-gray-800 dark:text-white transition duration-200 ease-linear"
+           aria-hidden="true"
+           xmlns="http://www.w3.org/2000/svg"
+           fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="m19 9-7 7-7-7"/>
+      </svg>
+    </button>
+
+    @if (openAccordion) {
+      <div class="accordion__body relative border border-gray-200 dark:border-gray-700 rounded-b-lg"
+           [class.active]="openAccordion">
+        <div class="accordion__row accordion-row py-1 dark:bg-gray-900 overflow-y-auto h-80 max-[1023px]:h-60">
+          @for (item of accordionData; track item) {
+            <label for="{{ item.name.en.toLowerCase() }}" class="accordion__label transition duration-200 ease-linear
+                      py-2 lg:py-2.5 px-4 lg:px-5 cursor-pointer
+                      text-base font-medium text-gray-700 hover:text-primary-700 dark:text-gray-400
+                      hover:dark:text-white hover:bg-gray-100 hover:dark:bg-gray-600
+                      flex justify-between items-center gap-4">
+              <span [innerHTML]="toggleLanguage(languageService, item.name)"></span>
+              <input id="{{ item.name.en.toLowerCase() }}" type="checkbox"
+                     value="{{ item.name.en.toLowerCase() }}"
+                     class="accordion__input w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600"
+                     [checked]="item.selected">
+            </label>
+          }
+        </div>
+
+        <div class="accordion__actions flex justify-center items-center py-2 lg:py-2.5 px-4 lg:px-5">
+          <button
+            type="button"
+            class="btn-primary min-[1024px]:w-full w-72"
+            (click)="getSearchParams()">
+            {{ "accordionComponent.buttonText" | translate }}
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+}
+

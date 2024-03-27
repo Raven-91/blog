@@ -1,0 +1,21 @@
+<!--      TODO Для ленивой загрузки [defaultImage]="" [lazyLoad]="" -->
+@if (data) {
+  <swiper-container
+    class="slider *:w-full *:h-[280px] *:sm:h-[350px] *:md:h-[390px] *:lg:h-[480px] *:xl:h-[600px]"
+    loop="false" autoplay="true" pagination="true" speed="1500" space-between="10" pagination-clickable="true" slider-per-view="1">
+    @for (item of data; track item) {
+      <swiper-slide lazy="true">
+        <div class="swiper-slide w-full bg-cover bg-no-repeat bg-center h-[280px] sm:h-[320px] md:h-[360px] lg:h-[450px]
+            xl:h-[570px] relative" style="background-image: url('{{serverStaticPath}}{{ item.image }}')">
+          <a routerLink="{{ item.url }}" class="absolute top-10 left-10 flex items-center justify-center bg-primary-300 rounded-md
+              text-lg lg:text-2xl text-center p-3 md:p-4 lg:p-5 font-medium hover:bg-primary-500 transition ease-linear duration-200
+              hover:text-white dark:bg-primary-600 text-primary-800 dark:text-white dark:hover:bg-primary-700
+              dark:hover:text-white max-w-[90%] min-[426px]:max-w-[50%] opacity-85 max-[425px]:top-3 max-[425px]:left-3 max-[425px]:p-3"
+             [innerHTML]="toggleLanguage(languageService, item.text)">
+          </a>
+        </div>
+      </swiper-slide>
+    }
+  </swiper-container>
+}
+

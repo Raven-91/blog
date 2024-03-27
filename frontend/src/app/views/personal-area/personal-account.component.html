@@ -1,0 +1,73 @@
+@if (userData) {
+  <section class="section">
+    <div class="ctn">
+      <h2
+        class="text-2xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-5 lg:mb-10 text-center uppercase">
+        {{ "personalAccountComponent.title" | translate }}
+      </h2>
+      <div
+        class="flex items-center md:items-start justify-center gap-2 md:gap-8 max-[767px]:flex-col">
+        <div class="user__photo w-72 md:w-full lg:w-80 h-[280px] lg:h-80 rounded-lg bg-cover bg-no-repeat bg-center"
+             [ngStyle]="userData.urlImage ?
+             { 'background-image': 'url('+serverStaticPath + userData.urlImage+')' } :
+             { 'background-image': 'url(./assets/images/user-default-photo.svg)' }">
+        </div>
+        <div class="p-4 flex flex-col gap-4 *:flex *:flex-col *:gap-2 *:*:text-gray-900 *:*:dark:text-white">
+          <div>
+            <span class="text-lg">{{ "personalAccountComponent.userFirstName" | translate }}:</span>
+            <span class="text-xl font-bold tracking-tight">{{ userData.firstName }}</span>
+          </div>
+          <div>
+            <span class="text-lg">{{ "personalAccountComponent.userLastName" | translate }}:</span>
+            <span class="text-xl font-bold tracking-tight">{{ userData.lastName }}</span>
+          </div>
+          <div>
+            <span class="text-lg">{{ "personalAccountComponent.userEmail" | translate }}:</span>
+            <span class="text-xl font-bold tracking-tight">{{ userData.email }}</span>
+          </div>
+          <div>
+            <span class="text-lg">{{ "personalAccountComponent.userStatus" | translate }}:</span>
+            <span class="text-xl font-bold tracking-tight">
+              <span [innerHTML]="toggleLanguage(languageService, userData.userStatus)"></span>
+              @if (userData.isAdmin) {
+                , <span [innerHTML]="toggleLanguage(languageService, userData.userAdmin)"></span>
+              }
+            </span>
+          </div>
+        </div>
+        <div class="p-4 flex flex-col gap-4">
+          <div>
+            <a routerLink="/favorites" class="inline-flex text-white bg-blue-700
+            font-medium rounded-lg text-base px-5 py-2.5 text-center
+            h-[60px] w-44 justify-center items-center
+            hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 focus:outline-none
+            dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              {{ "personalAccountComponent.userFavoritesArticles" | translate }}
+            </a>
+          </div>
+          <div>
+            <a routerLink="/projects" class="inline-flex text-white bg-blue-700
+            font-medium rounded-lg text-base px-5 py-2.5 text-center
+            h-[60px] w-44 justify-center items-center
+            hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 focus:outline-none
+            dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              {{ "personalAccountComponent.userOwnProjects" | translate }}
+            </a>
+          </div>
+          @if (userData.isAdmin) {
+            <div>
+              <a routerLink="/admin-dashboard" class="inline-flex text-white bg-blue-700
+            font-medium rounded-lg text-base px-5 py-2.5 text-center
+            h-[60px] w-44 justify-center items-center
+            hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 focus:outline-none
+            dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                {{ "personalAccountComponent.userAdminDashboard" | translate }}
+              </a>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+}
+

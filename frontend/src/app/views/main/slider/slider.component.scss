@@ -1,0 +1,14 @@
+swiper-container::part(bullet),
+swiper-container::part(bullet-active) {
+  width: 12px;
+  height: 12px;
+  margin: 0 8px;
+}
+
+swiper-container::part(pagination) {
+  bottom: 0;
+
+  @media (max-width: 639px) {
+    display: none;
+  }
+}

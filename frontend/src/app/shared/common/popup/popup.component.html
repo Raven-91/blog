@@ -1,0 +1,159 @@
+@if (openPopup) {
+  <div id="popup-modal" tabindex="-1" class="popup hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50
+  justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-gray-300/75 dark:bg-gray-900/75"
+       #popupWrapper
+       [ngStyle]="openPopup ? {'display': 'flex'} : {'display': 'none'}">
+    @if (popupParam === PopupParamsEnum.deleteItem) {
+      <div class="relative p-4 w-full max-w-md max-h-full">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200
+        hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center
+        dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal" (click)="closeModal()">
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+          <div class="p-4 md:p-5 text-center">
+            <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true"
+                 xmlns="http://www.w3.org/2000/svg"
+                 fill="none" viewBox="0 0 20 20">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+            </svg>
+            @if (subjectPage === PageParamsEnum.subjects) {
+              <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400"
+                  [innerHTML]="(numberOfItems === 1) ? ('popupComponent.deleteItemIssueSubject' | translate)  :
+                  ('popupComponent.deleteItemIssueSubjects' | translate)">
+              </h3>
+            }
+            @if (subjectPage === PageParamsEnum.articles) {
+              <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400"
+                  [innerHTML]="(numberOfItems === 1) ? ('popupComponent.deleteItemIssueArticle' | translate)  :
+                  ('popupComponent.deleteItemIssueArticles' | translate)">
+              </h3>
+            }
+            <div class="flex flex-wrap items-center justify-center gap-4">
+              <button data-modal-hide="popup-modal" type="button" class="btn-red" (click)="action.emit(ActionsEnum.deleteItem)">
+                {{ 'popupComponent.deleteItemButtonAgree' | translate }}
+              </button>
+              <button data-modal-hide="popup-modal" type="button" class="btn-transparent" (click)="closeModal()">
+                {{ 'popupComponent.deleteItemButtonCancel' | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+
+    @if (popupParam === PopupParamsEnum.createItem || popupParam === PopupParamsEnum.editItem) {
+      <div class="relative p-4 w-full max-w-md max-h-full">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+            @if (popupParam === PopupParamsEnum.createItem) {
+              @if (subjectPage === PageParamsEnum.subjects) {
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                  {{ 'popupComponent.createItemTitleSubject' | translate }}
+                </h3>
+              }
+              @if (subjectPage === PageParamsEnum.articles) {
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                  {{ 'popupComponent.createItemTitleArticle' | translate }}
+                </h3>
+              }
+            }
+            @if (popupParam === PopupParamsEnum.editItem) {
+              @if (subjectPage === PageParamsEnum.subjects) {
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                  {{ 'popupComponent.editItemTitleSubject' | translate }}
+                </h3>
+              }
+              @if (subjectPage === PageParamsEnum.articles) {
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                  {{ 'popupComponent.editItemTitleArticle' | translate }}
+                </h3>
+              }
+            }
+            <button type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200
+            hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center
+            dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal" (click)="closeModal()">
+              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                   viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+              </svg>
+              <span class="sr-only">Close modal</span>
+            </button>
+          </div>
+          <div class="p-4 md:p-5">
+            <form class="space-y-4" action="#" [formGroup]="popupForm">
+              <div>
+                <label for="item-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  @if (subjectPage === PageParamsEnum.subjects) {
+                    {{ 'popupComponent.inputLabelSubject' | translate }}
+                  }
+                  @if (subjectPage === PageParamsEnum.articles) {
+                    {{ 'popupComponent.inputLabelArticle' | translate }}
+                  }
+                </label>
+                <input type="text" name="item-name" id="item-name"
+                       [placeholder]="(subjectPage === PageParamsEnum.subjects) ?
+                       ('popupComponent.inputPlaceholderSubject' | translate) :
+                       ('popupComponent.inputPlaceholderArticle' | translate)"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                       focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
+                       dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                       formControlName="itemName"
+                       [class.invalid]="isValidInput(popupForm, 'itemName')"
+                       [class.valid]="getInputValue(popupForm, 'itemName')"/>
+                @if (isValidInput(popupForm, 'itemName')) {
+                  <p class="invalid-message mt-2 text-xs text-red-600 dark:text-red-400">
+                    {{ "popupComponent.inputInvalidMessage" | translate }}
+                  </p>
+                }
+              </div>
+              @if (popupParam === PopupParamsEnum.createItem) {
+              <button type="submit" class="btn-primary disabled w-full"
+                      [title]="(subjectPage === PageParamsEnum.subjects) ?
+                       ('popupComponent.buttonTitleSubject' | translate) :
+                       ('popupComponent.buttonTitleArticle' | translate)"
+                      [disabled]="popupForm.invalid"
+                      (click)="action.emit(ActionsEnum.createItem)">
+                  @if (subjectPage === PageParamsEnum.subjects) {
+                    {{ 'popupComponent.createItemButtonTextSubject' | translate }}
+                  }
+                  @if (subjectPage === PageParamsEnum.articles) {
+                    {{ 'popupComponent.createItemButtonTextArticle' | translate }}
+                  }
+              </button>
+              }
+              @if (popupParam === PopupParamsEnum.editItem) {
+              <button type="submit" class="btn-primary disabled w-full"
+                      [title]="(subjectPage === PageParamsEnum.subjects) ?
+                       ('popupComponent.buttonTitleSubject' | translate) :
+                       ('popupComponent.buttonTitleArticle' | translate)"
+                      [disabled]="popupForm.invalid"
+                      (click)="action.emit(ActionsEnum.editItemName)">
+                  @if (subjectPage === PageParamsEnum.subjects) {
+                    {{ 'popupComponent.editItemButtonTextSubject' | translate }}
+                  }
+                  @if (subjectPage === PageParamsEnum.articles) {
+                    {{ 'popupComponent.editItemButtonTextArticle' | translate }}
+                  }
+              </button>
+              }
+              @if (subjectPage === PageParamsEnum.articles && popupParam === PopupParamsEnum.editItem) {
+                <button type="button" class="btn-primary w-full" (click)="action.emit(ActionsEnum.editItem)">
+                  {{ 'popupComponent.editItemButtonTextArticle2' | translate }}
+                </button>
+              }
+            </form>
+          </div>
+        </div>
+
+      </div>
+    }
+  </div>
+}
+

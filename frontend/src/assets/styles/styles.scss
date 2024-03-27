@@ -1,0 +1,120 @@
+@use '@ngneat/hot-toast/src/styles/styles.scss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:is(.dark) {
+  .valid {
+    color: rgb(49 196 141);
+    background-color: rgb(55 65 81);
+    border-color: rgb(14 159 110) !important;
+
+    &:focus {
+      --tw-ring-color: rgb(14 159 110) !important;
+    }
+  }
+
+  .invalid {
+    color: rgb(240 82 82);
+    background-color: rgb(55 65 81);
+    border-color: rgb(240 82 82) !important;
+
+    &:focus {
+      --tw-ring-color: rgb(240 82 82) !important;
+    }
+  }
+
+  .editor-valid-block {
+    color: rgb(49 196 141);
+    border-color: rgb(14 159 110) !important;
+  }
+
+  .editor-invalid-block {
+    color: rgb(240 82 82);
+    border-color: rgb(240 82 82) !important;
+  }
+}
+
+.valid {
+  color: rgb(1 71 55);
+  background-color: rgb(243 250 247);
+  border-color: rgb(14 159 110) !important;
+
+  &:focus {
+    --tw-ring-color: rgb(14 159 110) !important;
+  }
+}
+
+.invalid {
+  color: rgb(119 29 29);
+  background-color: rgb(253 242 242);
+  border-color: rgb(240 82 82) !important;
+
+  &:focus {
+    --tw-ring-color: rgb(240 82 82) !important;
+  }
+}
+
+.editor-block {
+  border-radius: 8px;
+  border-width: 1.5px;
+  border-style: solid;
+}
+
+.editor-valid-block {
+  color: rgb(1 71 55);
+  border-color: rgb(14 159 110) !important;
+}
+
+.editor-invalid-block {
+  color: rgb(119 29 29);
+  border-color: rgb(240 82 82) !important;
+}
+
+.mat-mdc-snack-bar-label .mdc-snackbar__label {
+  text-align: center;
+}
+
+@layer components {
+  .ctn {
+    @apply container mx-auto px-4
+  }
+
+  .section {
+    @apply bg-white dark:bg-gray-900 py-8 md:py-12 lg:pt-12 lg:pb-16 w-full h-full
+  }
+
+  .btn-primary {
+    @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg
+    text-sm text-center px-5 py-2.5 min-w-40 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none
+    dark:focus:ring-blue-800
+  }
+
+  .btn-green {
+    @apply focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300
+    font-medium rounded-lg text-sm text-center px-5 py-2.5 min-w-40 dark:bg-green-600 dark:hover:bg-green-700
+    dark:focus:ring-green-800
+  }
+
+  .btn-red {
+    @apply focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300
+    font-medium rounded-lg text-sm text-center px-5 py-2.5 min-w-40 dark:bg-red-600 dark:hover:bg-red-700
+    dark:focus:ring-red-900
+  }
+
+  .btn-transparent {
+    @apply py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200
+    hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800
+    dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 min-w-40
+  }
+
+  .disabled {
+    @apply disabled:bg-gray-300 disabled:text-slate-500 disabled:border-gray-600 disabled:cursor-not-allowed
+    dark:disabled:bg-slate-400 dark:disabled:text-white dark:disabled:border-gray-600
+  }
+
+  .checkbox-table {
+    @apply w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600
+    dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 cursor-pointer
+  }
+}

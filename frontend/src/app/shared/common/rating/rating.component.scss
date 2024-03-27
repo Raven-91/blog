@@ -1,0 +1,23 @@
+.rating {
+  //.rating__item
+  &__item {
+    &:hover,
+    &:hover ~ .rating__item,
+    &.rated {
+      color: rgb(250 204 21);
+    }
+  }
+
+  &.readonly {
+    .rating__item {
+      cursor: default;
+
+      &:hover:not(.rated),
+      &:hover ~ .rating__item:not(.rated), {
+        color: rgb(209 213 219);
+      }
+    }
+  }
+}
+
+

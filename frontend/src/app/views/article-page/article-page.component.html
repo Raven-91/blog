@@ -1,0 +1,151 @@
+<section class="article bg-white dark:bg-gray-900 py-8 md:py-12 lg:py-16">
+  <div class="ctn">
+    <div class="article__subtitle *:text-lg *:md:text-xl *:dark:text-white mb-8 md:mb-12 lg:mb-16 pl-4">
+      <span class="text-gray-700">{{ "articlePageComponent.subtitle" | translate }} </span>
+      <span class="text-gray-900 font-semibold"
+            [innerHTML]="toggleLanguage(languageService, article.title)">
+
+      </span>
+    </div>
+    <div class="article__content article-content grid grid-cols-[minmax(280px,1fr)] grid-row-2
+                min-[1023px]:grid-cols-[minmax(280px,70%)_minmax(280px,25%)] gap-5">
+
+      <div class="p-4">
+        <h2 class="article-content__title mb-12 text-2xl md:text-3xl text-gray-900 font-semibold dark:text-white"
+            [innerHTML]="toggleLanguage(languageService, article.title)">
+        </h2>
+        <div class="article-content__body mb-12 flex flex-col gap-4 text-base *:md:text-lg *:text-gray-800 *:dark:text-white"
+             [innerHTML]="toggleLanguage(languageService, article.content)">
+        </div>
+        <div class="article-content__reaction mb-6 flex flex-col gap-5">
+          <div class="social-media__text text-gray-900 dark:text-white">
+            {{ "articlePageComponent.ratingArticle" | translate }}
+          </div>
+          <app-rating [rating]="article.rating ? article.rating : 0" class="self-start"></app-rating>
+        </div>
+        <div class="article-content__social-media social-media mb-12 flex flex-col gap-5">
+          <div class="social-media__text text-gray-900 dark:text-white">
+            {{ "articlePageComponent.shareArticle" | translate }}
+          </div>
+          <div class="social-media__links flex items-center gap-3 *:transition *:ease-linear *:duration-200">
+            <a href="#" class="text-primary-500 hover:text-primary-900 dark:hover:text-white">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill-rule="evenodd"
+                      d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                      clip-rule="evenodd"/>
+              </svg>
+            </a>
+            <a href="#" class="text-primary-500 hover:text-primary-900 dark:hover:text-white">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill-rule="evenodd"
+                      d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
+                      clip-rule="evenodd"/>
+              </svg>
+            </a>
+            <a href="#" class="text-primary-500 hover:text-primary-900 dark:hover:text-white">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="article-content__comments comments">
+          <h2 class="comments__title text-xl md:text-2xl text-gray-900 font-semibold dark:text-white"
+              [class]="isLogged && comments && comments.length > 0 ? 'mb-8' : 'mb-5'">
+            {{ "articlePageComponent.commentsTitle" | translate }}
+          </h2>
+          <div class="mb-16">
+            @if (!isLogged || !comments || (comments && comments.length < 1)) {
+              <div class="comments__info *:text-gray-900 *:dark:text-white mb-5">
+                @if (!isLogged) {
+                  <span>{{ "articlePageComponent.commentsInfoText1" | translate }} <a routerLink="/login" class="text-primary-500 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500">{{ "articlePageComponent.logInLink" | translate }}</a> {{ "articlePageComponent.commentsInfoText2" | translate }} <a
+                    routerLink="/signup" class="text-primary-500 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500">{{ "articlePageComponent.signUpLink" | translate }}</a>.
+              </span>
+                }
+                @if (!comments || (comments && comments.length < 1)) {
+                  <span>{{ "articlePageComponent.commentsInfoText3" | translate }}</span>
+                }
+              </div>
+            }
+            @if (isLogged) {
+              <form action="#" class="comments__form comments-form flex flex-col gap-5" [formGroup]="commentsForm">
+              <textarea id="comments" rows="8" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="{{ 'articlePageComponent.placeholderTextArea' | translate }}"
+                        formControlName="comments"
+                        [class.invalid]="isValidInput(commentsForm, 'comments')"
+                        [class.valid]="getInputValue(commentsForm, 'comments')">
+              </textarea>
+                <div class="comments-form__actions">
+                  <button type="button"
+                          class="text-white bg-primary-600 font-medium rounded-lg text-sm px-5 py-3 text-center hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 disabled:bg-gray-300 disabled:text-slate-500 disabled:border-gray-600 disabled:cursor-not-allowed dark:disabled:bg-slate-400 dark:disabled:text-white dark:disabled:border-gray-600"
+                          title="You must write comment before publish it."
+                          [disabled]="commentsForm.invalid" (click)="sendComment()">
+                    {{ "articlePageComponent.buttonText" | translate }}
+                  </button>
+                </div>
+              </form>
+            }
+          </div>
+          <div class="comments__list">
+
+            <div class="comment">
+              <div class="comment__info flex flex-col">
+                <header class="comment__header mb-4 flex items-center gap-6">
+                  <div class="comment__author-photo">
+                    <svg class="w-[60px] h-[60px] text-primary-700 dark:text-primary-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                      <path fill-rule="evenodd" d="M12 20a8 8 0 0 1-5-1.8v-.6c0-1.8 1.5-3.3 3.3-3.3h3.4c1.8 0 3.3 1.5 3.3 3.3v.6a8 8 0 0 1-5 1.8ZM2 12a10 10 0 1 1 10 10A10 10 0 0 1 2 12Zm10-5a3.3 3.3 0 0 0-3.3 3.3c0 1.7 1.5 3.2 3.3 3.2 1.8 0 3.3-1.5 3.3-3.3C15.3 8.6 13.8 7 12 7Z" clip-rule="evenodd"/>
+                    </svg>
+                  </div>
+                  <div class="comment__author-data flex flex-col gap-1 *:dark:text-white">
+                    <div class="comment__author-name text-base md:text-lg font-medium text-primary-500">Jackson</div>
+                    <div class="comment__author-data text-gray-600">20.01.2023 23:00</div>
+                  </div>
+                </header>
+                <div class="comment__body mb-10">
+                  <p class="dark:text-white text-base">
+                    Статья супер, спасибо! Взяла на заметку очень многое для себя и своей фирмы по разработке пользовательского интерфейса.
+                    Хотелось бы послушать мнение других тоже!
+                  </p>
+                </div>
+                <footer class="comment__footer flex items-center gap-4 *:flex *:items-center *:gap-1">
+                  <div class="comment__reaction reaction *:text-gray-800 dark:*:text-white *:transition *:ease-linear *:duration-200 selected">
+                    <span class="reaction__count">15</span>
+                    <svg class="reaction__icon w-[24px] h-[24px] hover:text-primary-500 dark:hover:text-primary-500 cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <title>{{ "articlePageComponent.likeReaction" | translate }}</title>
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M7 11c.9 0 1.4-.5 2.2-1a33.3 33.3 0 0 0 4.5-5.8 1.5 1.5 0 0 1 2 .3 1.6 1.6 0 0 1 .4 1.3L14.7 10M7 11H4v6.5c0 .8.7 1.5 1.5 1.5v0c.8 0 1.5-.7 1.5-1.5V11Zm6.5-1h5l.5.1a1.8 1.8 0 0 1 1 1.4l-.1.9-2.1 6.4c-.3.7-.4 1.2-1.7 1.2-2.3 0-4.8-1-6.7-1.5"/>
+                    </svg>
+                  </div>
+                  <div class="comment__reaction *:text-gray-800 dark:*:text-white *:transition *:ease-linear *:duration-200">
+                    <span class="reaction__count">3</span>
+                    <svg class="reaction__icon w-[24px] h-[24px] hover:text-primary-500 dark:hover:text-primary-500 cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <title>{{ "articlePageComponent.disLikeReaction" | translate }}</title>
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M17 13c-.9 0-1.4.5-2.2 1a22.3 22.3 0 0 0-4 5.1c0 .3-.2.5-.5.7a1.5 1.5 0 0 1-2-.4 1.6 1.6 0 0 1-.4-1.2L9.3 14m7.7-1h3V6.5c0-.8-.7-1.5-1.5-1.5v0c-.8 0-1.5.7-1.5 1.5V13Zm-6.5 1h-5a1 1 0 0 1-.5-.1 1.8 1.8 0 0 1-1-1.4l.1-.9 2.1-6.4C6.5 4.5 6.6 4 8 4c2.3 0 4.8 1 6.7 1.5"/>
+                    </svg>
+                  </div>
+                  <div class="comment__reaction *:text-gray-800 dark:*:text-white *:transition *:ease-linear *:duration-200">
+                    <svg class="reaction__icon w-[24px] h-[24px] hover:text-primary-500 dark:hover:text-primary-500 cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <title>{{ "articlePageComponent.complainReaction" | translate }}</title>
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 13V8m0 8h0m9-4a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                    </svg>
+                  </div>
+                </footer>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      @if (relatedArticle) {
+        <div class="article-content__relatives flex flex-col mt-4 gap-5">
+          <h5 class="text-xl font-medium text-gray-900 dark:text-white">{{ "articlePageComponent.titleForRelatives" | translate }}</h5>
+          @for (article of relatedArticle; track article) {
+            <app-article-item class="max-w-screen-lg" [item]="article" [relativesArticle]="true"></app-article-item>
+          }
+        </div>
+      }
+
+    </div>
+  </div>
+</section>

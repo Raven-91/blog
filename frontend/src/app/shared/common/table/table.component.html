@@ -1,0 +1,217 @@
+@if (page) {
+  <div class="table w-full bg-white dark:bg-gray-800 relative shadow-lg sm:rounded-lg overflow-hidden">
+    <div class="w-full flex items-center justify-end gap-5 py-3 px-4 border-gray-300"
+         [class.justify-between]="page === PageParamsEnum.articles">
+      @if (page === PageParamsEnum.articles) {
+        <div class="sorting">
+          <app-select></app-select>
+        </div>
+      }
+      <div class="table__actions flex items-center gap-5">
+        @if (page === PageParamsEnum.subjects || page === PageParamsEnum.articles) {
+          <button type="button"
+                  class="btn-green"
+                  title="{{ 'tableComponent.buttonCreateTitle' | translate }}"
+                  (click)="buttonClick(PopupParamsEnum.createItem)">
+            {{ "tableComponent.buttonCreateCollection" | translate }}
+          </button>
+          <button type="button"
+                  class="btn-primary disabled"
+                  title="{{ 'tableComponent.buttonEditTitle' | translate }}"
+                  [disabled]="!isEdited"
+                  (click)="buttonClick(PopupParamsEnum.editItem)">
+            {{ "tableComponent.buttonEditCollection" | translate }}
+          </button>
+          <button type="button"
+                  class="btn-red disabled"
+                  name="editButton"
+                  title="{{ 'tableComponent.buttonDeleteTitle' | translate }}"
+                  [disabled]="!isDeleted"
+                  (click)="buttonClick(PopupParamsEnum.deleteItem)">
+            {{ "tableComponent.buttonDeleteCollection" | translate }}
+          </button>
+        }
+        @if (page === PageParamsEnum.admin) {
+          <button type="button"
+                  class="btn-green"
+                  title="Activate user"
+                  (click)="buttonClick(PopupParamsEnum.activate)">
+            Activate
+          </button>
+          <button type="button"
+                  class="btn-primary disabled"
+                  title="Block user"
+                  [disabled]="!isEdited"
+                  (click)="buttonClick(PopupParamsEnum.block)">
+            Block
+          </button>
+          <button type="button"
+                  class="btn-red disabled"
+                  name="editButton"
+                  title="Delete user"
+                  [disabled]="!isDeleted"
+                  (click)="buttonClick(PopupParamsEnum.delete)">
+            Delete
+          </button>
+        }
+      </div>
+    </div>
+    <div class="overflow-x-auto"
+         [ngClass]="{
+           'max-[1023px]:w-[990px]': page === PageParamsEnum.articles,
+           'max-[767px]:w-[736px]': page === PageParamsEnum.subjects,
+           }">
+      <table class="w-full text-base text-center text-gray-500 dark:text-gray-400 ">
+        <thead class="text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-4 py-4 w-[4%]">
+            <input id="select-all" type="checkbox" class="checkbox-table"
+                   title="{{ 'tableComponent.tableCheckboxTitle' | translate }}"
+                   [checked]="parentSelector"
+                   (click)="selectAllCheckbox()">
+          </th>
+          <th scope="col" class="px-4 py-3">№</th>
+          <th scope="col" class="px-4 py-3">
+            @if (page === PageParamsEnum.subjects) {
+              {{ "tableComponent.tableSubjectsNameField" | translate }}
+            }
+            @if (page === PageParamsEnum.articles) {
+              {{ "tableComponent.tableArticlesNameField" | translate }}
+            }
+            @if (page === PageParamsEnum.admin) {
+              Name
+            }
+          </th>
+          <th scope="col" class="px-4 py-3 w-[20%]">
+            @if (page === PageParamsEnum.subjects) {
+              {{ "tableComponent.tableSubjectsNumberOfArticlesField" | translate }}
+            }
+            @if (page === PageParamsEnum.articles) {
+              {{ "tableComponent.tableArticlesStatusField" | translate }}
+            }
+            @if (page === PageParamsEnum.admin) {
+              Role
+            }
+          </th>
+          @if (page === PageParamsEnum.articles || page === PageParamsEnum.admin) {
+            <th scope="col" class="px-4 py-3 w-[20%]">
+              @if (page === PageParamsEnum.articles) {
+                {{ "tableComponent.tableArticlesActionField" | translate }}
+              }
+              @if (page === PageParamsEnum.admin) {
+                Status
+              }
+            </th>
+          }
+        </tr>
+        </thead>
+        <tbody>
+          @if (page === PageParamsEnum.subjects && data === subjects) {
+            @for (item of data; let idx = $index; track item) {
+              <tr class="border-b dark:border-gray-700">
+                <td class="px-4 py-4">
+                  <input id="{{ item.id }}" type="checkbox" class="checkbox-table"
+                         [value]="item.id"
+                         [checked]="item.selected"
+                         (change)="toggleCheckbox($event)">
+                </td>
+                <td class="px-4 py-3">{{ idx + 1 }}</td>
+                <td class="px-4 py-3">
+                  <a routerLink="/project" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                     [innerHTML]="toggleLanguage(languageService, item.subject)">
+                  </a>
+                </td>
+                <td class="px-4 py-3"> {{ item.articles.length }}</td>
+              </tr>
+            }
+          }
+
+          @if (page === PageParamsEnum.articles && data === articles) {
+            @for (item of data; let idx = $index; track item) {
+              <tr class="border-b dark:border-gray-700">
+                <td class="px-4 py-4">
+                  <input id="{{ item.id }}" type="checkbox" class="checkbox-table"
+                         [value]="item.id"
+                         [checked]="item.selected"
+                         (change)="toggleCheckbox($event)">
+                </td>
+                <td class="px-4 py-3">{{ idx + 1 }}</td>
+                <td class="px-4 py-3">
+                    <span class="text-gray-700 dark:text-gray-400"
+                          [innerHTML]="toggleLanguage(languageService, item.title)">
+                    </span>
+                </td>
+                <td class="px-4 py-3">
+                  @if (item.status?.published) {
+                    {{ "tableComponent.articleStatusPublished" | translate }}
+                  } @else if (item.status?.unpublished) {
+                    {{ "tableComponent.articleStatusUnPublished" | translate }}
+                  } @else if (item.status?.draft) {
+                    {{ "tableComponent.articleStatusDraft" | translate }}
+                  }
+                </td>
+                <td class="px-4 py-3">
+                  @if (item.status?.unpublished) {
+                    <button type="button" class="btn-red" (click)="unPublish()"
+                            title="{{ 'tableComponent.articleActionButtonUnPublishTitle' | translate }}">
+                      {{ "tableComponent.articleActionButtonUnPublish" | translate }}
+                    </button>
+                  } @else if (item.status?.published) {
+                    <button type="button" class="btn-green" (click)="publish()"
+                            title="{{ 'tableComponent.articleActionButtonPublishTitle' | translate }}">
+                      {{ "tableComponent.articleActionButtonPublish" | translate }}
+                    </button>
+                  } @else if (item.status?.draft) {
+                    <button type="button" class="btn-green disabled" [disabled]="item.status?.draft">
+                      Publish
+                    </button>
+                  }
+                </td>
+              </tr>
+            }
+          }
+          @if (page === PageParamsEnum.admin && data === usersData) {
+            @for (item of data; let idx = $index; track item) {
+              <tr class="border-b dark:border-gray-700">
+                <td class="px-4 py-4">
+                  <input id="{{ item.id }}" type="checkbox" class="checkbox-table"
+                         [value]="item.id"
+                         [checked]="item.selected"
+                         (change)="toggleCheckbox($event)">
+                </td>
+                <td class="px-4 py-3">{{ idx + 1 }}</td>
+                <td class="px-4 py-3">
+                    <span class="text-gray-700 dark:text-gray-400">
+                      {{ item.firstName + ' ' + item.lastName }}
+                    </span>
+                </td>
+                <td class="px-4 py-3">
+                  <span [innerHTML]="toggleLanguage(languageService, item.userStatus)"></span>
+                  @if (item.isAdmin) {
+                    , <span [innerHTML]="toggleLanguage(languageService, item.userAdmin)"></span>
+                  }
+                </td>
+                <td class="px-4 py-3">
+                  @if (item.status.isActivated) {
+                    active
+                  }
+                  @if (item.status.isBlocked) {
+                    blocked
+                  }
+                </td>
+              </tr>
+            }
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+}
+<app-popup
+  [openPopup]="openPopup"
+  [popupParam]="popupParam"
+  [subjectPage]="page"
+  [numberOfItems]="numberOfItems"
+  (renewStatusOpenModal)="renewStatusOpenModal($event)"
+  (action)="getAction($event)">
+</app-popup>
